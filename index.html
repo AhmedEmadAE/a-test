@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <title>التحقق من البيانات</title>
+
+    <!-- css -->
+    <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --bg-glass: rgba(255, 255, 255, 0.15);
+            --text-light: #fff;
+            --text-dark: #333;
+            --valid: #2ecc71;
+            --invalid: #e74c3c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 360px;
+            padding: 2rem;
+            border-radius: 16px;
+            background: var(--bg-glass);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            color: var(--text-light);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+            padding: 0.6rem 0;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-bottom-color: var(--secondary);
+        }
+
+        label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            transition: transform 0.3s, font-size 0.3s;
+            transform-origin: left;
+        }
+
+        /* Floating label */
+        input:focus+label,
+        input:not(:placeholder-shown)+label {
+            transform: translateY(-1.5rem) scale(0.8);
+            font-size: 0.9rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        .result.valid {
+            color: var(--valid);
+        }
+
+        .result.invalid {
+            color: var(--invalid);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>التحقق من البيانات</h2>
+
+        <div class="form-group">
+            <input type="text" id="fullName" placeholder=" " autocomplete="off" />
+            <label for="fullName">الاسم الكامل</label>
+        </div>
+
+        <div class="form-group">
+            <input type="text" id="email" placeholder=" " autocomplete="off" />
+            <label for="email">البريد الإلكتروني</label>
+        </div>
+
+        <button onclick="validate()">تحقق الآن</button>
+
+        <p id="nameResult" class="result"></p>
+        <p id="emailResult" class="result"></p>
+    </div>
+
+    <script>
+        function validate() {
+            let fullName = document.getElementById("fullName").value.trim();
+            let email = document.getElementById("email").value.trim();
+
+            let fullNameRegex = /^([A-Za-z]{3,})(\s[A-Za-z]{3,})+$/;
+            let emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.(com\.eg|net\.eg|edu\.eg|org\.eg)$/;
+
+            let nameResult = document.getElementById("nameResult");
+            let emailResult = document.getElementById("emailResult");
+
+            if (fullNameRegex.test(fullName)) {
+                nameResult.textContent = "✔ الاسم صحيح";
+                nameResult.className = "result valid";
+            } else {
+                nameResult.textContent = "✘ الاسم غير صحيح";
+                nameResult.className = "result invalid";
+            }
+
+            if (emailRegex.test(email)) {
+                emailResult.textContent = "✔ البريد صحيح";
+                emailResult.className = "result valid";
+            } else {
+                emailResult.textContent = "✘ البريد غير صحيح";
+                emailResult.className = "result invalid";
+            }
+        }
+    </script>
+</body>
+
+</html>
