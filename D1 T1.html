@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background-color: rgb(77, 149, 149);
+            color: white;
+            width: 200px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            transition: width 0.3s ease;
+        }
+
+        .sidebar.sidebar-collapsed {
+            width: 60px;
+        }
+
+        .A {
+            list-style: none;
+            padding: 10px;
+            margin: 10px;
+
+        }
+
+        div {
+            padding: 10px 0;
+
+        }
+
+        .n:hover {
+            background-color: rgb(16, 16, 63);
+
+            transition: 1s;
+            display: flex;
+            justify-content: center;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: rgb(77, 149, 149);
+            padding: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .main-content {
+            display: grid;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border: 4px solid rgb(77, 149, 149);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+
+        }
+
+        .card:hover {
+            background-color: rgb(77, 149, 149);
+            border: 4px solid black;
+            transition: 0.8s;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                padding: 10px;
+            }
+
+            .A {
+                display: flex;
+            }
+
+            .n {
+                padding: 5px 10px;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <button id="toggleSidebar">☰</button>
+        <div class="A">
+            <div class="n">Dashboard</div>
+            <div class="n">Users</div>
+            <div class="n">Products</div>
+            <div class="n">Settings</div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="header">
+            <h1>Dashboard</h1>
+        </div>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>Sales</h2>
+                <p>$45,000</p>
+            </div>
+            <div class="card">
+                <h2>Users</h2>
+                <p>3000</p>
+            </div>
+            <div class="card">
+                <h2>Products</h2>
+                <p>200</p>
+            </div>
+            <div class="card">
+                <h2>Orders</h2>
+                <p>4000</p>
+            </div>
+            <div class="card">
+                <h2>Revenue</h2>
+                <p>$50,000</p>
+            </div>
+            <div class="card">
+                <h2>Reports</h2>
+                <p>View Reports</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sidebar = document.querySelector('.sidebar');
+        const toggleSidebarButton = document.getElementById('toggleSidebar');
+
+        toggleSidebarButton.addEventListener('click', () => {
+            sidebar.classList.toggle('sidebar-collapsed');
+        });
+    </script>
+
+</body>
+
+</html>
